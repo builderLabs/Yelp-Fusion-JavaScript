@@ -43,9 +43,10 @@ they should be kept secret and never exposed.
 
 Perhaps as a result of this, the Fusion API ***appears to have been developed  
 with the intention for back-end use*** as there is no current "approved" method  
-of using fusion via JavaScript.  Accordingly, Ajax requests from the front-end  
-result in CORS issues, as neither CORS headers nor the JSONP workarounds are  
-supported by Fusion (at least not at the time of this writing).  
+of using Fusion via JavaScript.  Accordingly, Ajax requests from the front-end  
+result in CORS (Cross Origin Resource Sharing violation) issues, as neither  
+CORS headers nor the JSONP workarounds are supported by Fusion (at least not  
+at the time of this writing).  
 &nbsp;  
 
 ## Why does this matter?
@@ -155,10 +156,10 @@ bearer token server-side and set as a cookie client-side with JavaScript making
 a request for the salt from my application upon loading.  
 
 The idea was that once in the browser, the salted bearer token cookie would be  
-unusable but that my JavaScript, knowing the salt, could cleanse/unsalt the cookie  
-to get the 'clean' bearer token when sending requests to Fusion.  
+unusable but that my JavaScript, knowing the salt, could cleanse/unsalt the  
+cookie to get the 'clean' bearer token when sending requests to Fusion.  
 
-Of course, the issue of persistence rises here.  Sure, I can get that salt  
+Of course, the issue of persistence arises here.  Sure, I can get that salt  
 into a JavaScript memory space upon loading but once that script is run, it's  
 gone.  Now the question arises as to how to hold on to that salt value without  
 storing as a cookie or in local storage.  Further, since the stack/associated  
@@ -251,7 +252,7 @@ That said, we *do* have at our disposal a tool which allows us to emulate a
 proxy server request, supporting a CORS header in the process, thereby allowing  
 us to complete our query as though it were 'server-side', bypassing the CORS  
 violation.  This works by simply prepending the indicated URL to our target URL  
-and voila - we get to serve a request with raising any CORS violations.  
+and voila - we get to serve a request without raising any CORS violations.  
 You can read more about this [here](https://www.npmjs.com/package/cors-anywhere).
 &nbsp;  
 
@@ -265,7 +266,7 @@ token from Yelp using our client credentials.  Our application will then
 generate a random salt and salt the token and pass both to our JavaScript query  
 when requested.  
 
-2). When the user initiates a Yelp query from the browser, we will send an ajax  
+2). When the user initiates a Yelp query from the browser, we will send an Ajax  
 request to our application which will return the salted token and its salt and  
 use JavaScript to cleanse the salted token.  This way, we have two mysterious  
 bits of data coming into the browser, but only briefly - avoiding long periods  
@@ -282,9 +283,10 @@ in this traffic, but that's the price which must be paid, currently.
 
 The following are the relevant snippets I have used for this (my backend  
 application was built in Python for which a very good reference to interfacing  
-with Fusion can be found [here](https://github.com/Yelp/yelp-fusion/tree/master/fusion/python)).
-Note that since I went the Python route, this also meant using Flask for some  
-of the tasks involved, per the suggestion of Yelp folks.
+with Fusion from Yelp developers can be found [here](https://github.com/Yelp/yelp-fusion/tree/master/fusion/python)).
+Note that since I went the  
+Python route, this also meant using Flask for some of the tasks involved, per  
+the suggestion of Yelp folks.  
 
 ### A). Backend Part:
 
@@ -374,8 +376,8 @@ def giveItUp():
     return json.dumps(outgoing)
 ```
 
-Note that given our use of global variables, these persist in memory and can  
-be readily served back between query calls in the browser.  
+Again, as global variables, these persist in memory and can be readily served  
+back between query calls in the browser.  
 
 
 
@@ -457,10 +459,10 @@ Token-wise, note that we do not expose our bearer token until the very last
 step - in fact, it's evaluated as we send off the query to Fusion.  For our  
 purposes here, I have simply stripped the salt from the salted token but more  
 innovative approaches (including entirely different ciphering methods) are  
-possible.  Not foolproof by any means, but perhaps inconvenient enough.  
+possible.  Not foolproof by any means, but perhaps *inconvenient enough*.  
 
 Obviously, you can do whatever you want with the output but the nice thing is  
-that it's sent back to the browser where you can do whatever you want with it.  
+that it's sent back to the browser where it's ready to be rendered as you wish.  
 In this case, I simply report it to console log.  
 
 Here is some of what that looks like when searching for burgers in Boston:
@@ -475,6 +477,8 @@ samples at GitHub be studied closely to glean best practices for sending
 queries to Fusion.
 
 There's probably other (better) ways of accomplishing this task, but I figured  
-it would help to document one such approach.  Hope you find it useful.  
+it would help to document one such approach.  
+
+Hope you find it useful.  
 
 &nbsp;  
