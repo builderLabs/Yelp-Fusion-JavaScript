@@ -379,7 +379,7 @@ be readily served back between query calls in the browser.
 
 
 
-### A). Frontend Part:
+### B). Frontend Part:
 
 
 Below is a basic JavaScript sample I have hammered out which works with the  
