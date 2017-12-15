@@ -1,6 +1,15 @@
 # Yelp Fusion API: A Front-End Approach
 &nbsp;  
 
+
+## UPDATE (Dec. 2017): 
+
+*Yelp announced this week that the authentication method for Yelp Fusion*  
+*will migrate to an API key-based protocol from the initial OAuth 2.0 approach,*  
+*as critiqued below.  As a result, the OAuth2 token endpoint will be deprecated*  
+*on  March 1, 2018.  Refer to the [Yelp authentication guide](https://www.yelp.com/developers/documentation/v3/authentication?ytl_=47ZWbund2-3RlKUncNep-w&utm_medium=email&utm_source=email_blaster_email&utm_campaign=Dec-13-2017#where-is-my-client-secret-going) for more info.*  
+
+
 ## Background
 
 For those not in the know, Yelp is that wonderful and ubiquitous crowd-sourced  
