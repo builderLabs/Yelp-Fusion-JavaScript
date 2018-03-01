@@ -2,12 +2,18 @@
 &nbsp;  
 
 
-## UPDATE (Dec. 2017): 
+## UPDATE (Feb. 28, 2018):
 
-*Yelp announced this week that the authentication method for Yelp Fusion*  
-*will migrate to an API key-based protocol from the initial OAuth 2.0 approach,*  
-*as critiqued below.  As a result, the OAuth2 token endpoint will be deprecated*  
-*on  March 1, 2018.  Refer to the [Yelp authentication guide](https://www.yelp.com/developers/documentation/v3/authentication?ytl_=47ZWbund2-3RlKUncNep-w&utm_medium=email&utm_source=email_blaster_email&utm_campaign=Dec-13-2017#where-is-my-client-secret-going) for more info.*  
+*Please note that due to Yelp's deprecation of the use of bearer tokens*  
+*in authorization headers as of March 1, 2018 for queries sent to the*  
+*Yelp Fusion API, the information in this article is now obsolete.*  
+*As of December 2017, Yelp has supplanted the use of bearer tokens with*  
+*API Keys in their authentication protocol for Yelp Fusion, broadly in keeping*  
+*with some of the critiques offered here in this article (originally published*  
+*in June, 2017).  As a result, the outdated information below is meant to serve*  
+*pedagogical purposes only.*   
+
+*Refer to the [Yelp authentication guide](https://www.yelp.com/developers/documentation/v3/authentication?ytl_=47ZWbund2-3RlKUncNep-w&utm_medium=email&utm_source=email_blaster_email&utm_campaign=Dec-13-2017#where-is-my-client-secret-going) for more info.*  
 
 
 ## Background
